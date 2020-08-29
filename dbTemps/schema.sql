@@ -15,6 +15,7 @@ PRIMARY KEY(id)
 CREATE TABLE users (
 id int NOT NULL AUTO_INCREMENT,
 name VARCHAR (20),
+email VARCHAR (200),
 password VARCHAR (20),
 PRIMARY KEY(id)
 );
