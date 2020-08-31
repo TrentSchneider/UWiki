@@ -1,6 +1,6 @@
 // Creating our wikis model
 module.exports = function(sequelize, DataTypes) {
- var Wikis = sequelize.define("Wiki", {
+ const Wikis = sequelize.define("Wiki", {
     category: {
         type: DataTypes.STRING,
         allowNull: false,
