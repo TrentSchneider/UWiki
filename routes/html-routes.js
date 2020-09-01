@@ -14,12 +14,13 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/api/view/:id", (req, res) => {
+router.get("/view/:id", (req, res) => {
   db.Wikis.findOne({
     where: {
       id: req.params.id
     }
   }).then(hbsObject => {
+    // will switch out index when single view handlebars file created
     res.render("index", hbsObject);
   });
 });
@@ -35,6 +36,11 @@ router.delete("/api/delete/:id", req => {
     }
     res.status(200);
   });
+});
+
+router.get("/create", (req, res) => {
+  // will switch out index when create form handlebars added
+  res.render("index");
 });
 
 router.post("/api/create", (req, res) => {
