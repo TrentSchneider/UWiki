@@ -41,8 +41,8 @@ router.delete("/api/delete/:id", req => {
 });
 
 router.post("/api/create", (req, res) => {
-  // create is a placeholder reference
-  wiki.create(
+  // Wiki is a placeholder reference
+  db.Wiki.create(
     [
       { category: req.body.category },
       { title: req.body.title },
