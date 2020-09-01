@@ -9,15 +9,13 @@ const db = require("../models");
 
 // these routers will construct the handlebars and display them after they use the sequelize call
 router.get("/", (req, res) => {
-  // Wiki is a placeholder reference
-  db.Wiki.findAll().then(hbsObject => {
+  db.Wikis.findAll().then(hbsObject => {
     res.render("index", hbsObject);
   });
 });
 
 router.get("/api/view/:id", (req, res) => {
-  // Wiki is a placeholder reference
-  db.Wiki.findOne({
+  db.Wikis.findOne({
     where: {
       id: req.params.id
     }
@@ -27,8 +25,7 @@ router.get("/api/view/:id", (req, res) => {
 });
 
 router.delete("/api/delete/:id", req => {
-  // Wiki is a placeholder reference
-  db.Wiki.destroy({
+  db.Wikis.destroy({
     where: {
       id: req.params.id
     }
@@ -41,8 +38,7 @@ router.delete("/api/delete/:id", req => {
 });
 
 router.post("/api/create", (req, res) => {
-  // Wiki is a placeholder reference
-  db.Wiki.create(
+  db.Wikis.create(
     [
       { category: req.body.category },
       { title: req.body.title },
