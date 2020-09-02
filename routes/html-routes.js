@@ -25,35 +25,14 @@ router.get("/view/:id", (req, res) => {
   });
 });
 
-router.delete("/api/delete/:id", req => {
-  db.Wikis.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then((res, err) => {
-    if (err) {
-      throw err;
-    }
-    res.status(200);
-  });
-});
-
 router.get("/create", (req, res) => {
   // will switch out index when create form handlebars added
   res.render("index");
 });
 
-router.post("/api/create", (req, res) => {
-  db.Wikis.create(
-    [
-      { category: req.body.category },
-      { title: req.body.title },
-      { description: req.body.description }
-    ],
-    result => {
-      res.status(200).json(result.title + "has been added.");
-    }
-  );
+router.get("/about", (req, res) => {
+  // will switch out index when about handlebars added
+  res.render("about");
 });
 
 // router.get("/", (req, res) => {
