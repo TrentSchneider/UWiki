@@ -9,7 +9,7 @@ const db = require("../models");
 
 // these routers will construct the handlebars and display them after they use the sequelize call
 router.get("/", (req, res) => {
-  db.wikis.findAll().then((data) => {
+  db.wikis.findAll().then(data => {
     const hbsObject = { wikis: data };
     res.render("index", hbsObject);
   });
@@ -19,10 +19,12 @@ router.get("/view/:id", (req, res) => {
   db.wikis
     .findOne({
       where: {
-        id: req.params.id,
-      },
+        id: req.params.id
+      }
     })
-    .then((hbsObject) => {
+    .then(data => {
+      const hbsObject = { wikis: data };
+
       // will switch out index when single view handlebars file created
       res.render("index", hbsObject);
     });
@@ -54,12 +56,12 @@ router.get("/about", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../public/members.html"));
 // });
 
-router.delete("/api/delete/:id", (req) => {
+router.delete("/api/delete/:id", req => {
   db.wikis
     .destroy({
       where: {
-        id: req.params.id,
-      },
+        id: req.params.id
+      }
     })
     .then((res, err) => {
       if (err) {
@@ -74,9 +76,9 @@ router.post("/api/create", (req, res) => {
     [
       { category: req.body.category },
       { title: req.body.title },
-      { description: req.body.description },
+      { description: req.body.description }
     ],
-    (result) => {
+    result => {
       res.status(200).json(result.title + "has been added.");
     }
   );
