@@ -9,20 +9,23 @@ const db = require("../models");
 
 // these routers will construct the handlebars and display them after they use the sequelize call
 router.get("/", (req, res) => {
-  db.Wikis.findAll().then(hbsObject => {
+  db.wikis.findAll().then((data) => {
+    const hbsObject = { wikis: data };
     res.render("index", hbsObject);
   });
 });
 
 router.get("/view/:id", (req, res) => {
-  db.Wikis.findOne({
-    where: {
-      id: req.params.id
-    }
-  }).then(hbsObject => {
-    // will switch out index when single view handlebars file created
-    res.render("index", hbsObject);
-  });
+  db.wikis
+    .findOne({
+      where: {
+        id: req.params.id,
+      },
+    })
+    .then((hbsObject) => {
+      // will switch out index when single view handlebars file created
+      res.render("index", hbsObject);
+    });
 });
 
 router.get("/create", (req, res) => {
@@ -51,27 +54,29 @@ router.get("/about", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../public/members.html"));
 // });
 
-router.delete("/api/delete/:id", req => {
-  db.Wikis.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then((res, err) => {
-    if (err) {
-      throw err;
-    }
-    res.status(200);
-  });
+router.delete("/api/delete/:id", (req) => {
+  db.wikis
+    .destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    .then((res, err) => {
+      if (err) {
+        throw err;
+      }
+      res.status(200);
+    });
 });
 
 router.post("/api/create", (req, res) => {
-  db.Wikis.create(
+  db.wikis.create(
     [
       { category: req.body.category },
       { title: req.body.title },
-      { description: req.body.description }
+      { description: req.body.description },
     ],
-    result => {
+    (result) => {
       res.status(200).json(result.title + "has been added.");
     }
   );
