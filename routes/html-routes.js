@@ -26,18 +26,18 @@ router.get("/view/:id", (req, res) => {
       const hbsObject = { wikis: data };
 
       // will switch out index when single view handlebars file created
-      res.render("index", hbsObject);
+      res.render("viewWiki", hbsObject);
     });
 });
 
 router.get("/create", (req, res) => {
   // will switch out index when create form handlebars added
-  res.render("index");
+  res.render("createWiki");
 });
 
 router.get("/about", (req, res) => {
   // will switch out index when about handlebars added
-  res.render("about");
+  res.render("index");
 });
 
 // router.get("/login", (req, res) => {
