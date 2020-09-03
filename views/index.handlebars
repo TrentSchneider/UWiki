@@ -17,18 +17,17 @@
         </div>
       </form>
     </div>
-    {{!-- data-id="{{id}}" --}}
     <ul>
       {{#each wikis}}
         <li>
           <p>
             Category:
-            {{category}}
+            {{this.category}}
           </p>
           <a href="#!" class="collection-item">
             <p>
               Title:
-              {{title}}
+              {{this.title}}
             </p>
           </a>
         </li>
