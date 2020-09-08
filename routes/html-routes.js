@@ -8,6 +8,8 @@ const db = require("../models");
 // const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // these routers will construct the handlebars and display them after they use the sequelize call
+
+// route for main page that grabs all wikis
 router.get("/", (req, res) => {
   db.wikis.findAll().then(data => {
     const hbsObject = { wikis: data };
@@ -15,6 +17,22 @@ router.get("/", (req, res) => {
   });
 });
 
+// route for the main page that grabs the wikis for the category chosen in the dropdown
+router.get("/:category", (req, res) => {
+  db.wikis
+    .findAll({
+      where: {
+        category: req.params.category
+      }
+    })
+    .then(data => {
+      const hbsObject = { wikis: data };
+
+      res.render("index", hbsObject);
+    });
+});
+
+// route for the view page that displays the wiki for the id that matches the button's data-id
 router.get("/view/:id", (req, res) => {
   db.wikis
     .findOne({
@@ -24,20 +42,19 @@ router.get("/view/:id", (req, res) => {
     })
     .then(data => {
       const hbsObject = { wikis: data };
-
-      // will switch out index when single view handlebars file created
-      res.render("index", hbsObject);
+      res.render("viewWiki", hbsObject);
     });
 });
 
+// route for the wiki creation form
 router.get("/create", (req, res) => {
-  // will switch out index when create form handlebars added
-  res.render("index");
+  res.render("createWiki");
 });
 
+// route for the about page
 router.get("/about", (req, res) => {
   // will switch out index when about handlebars added
-  res.render("about");
+  res.render("index");
 });
 
 // router.get("/login", (req, res) => {
