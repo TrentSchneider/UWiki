@@ -17,21 +17,23 @@
         </div>
       </form>
     </div>
-    <ul>
-      {{#each wikis}}
-      <li>
-        <p>
-          Category:
-          {{this.category}}
-        </p>
-        <a href="#!" class="collection-item">
+    <div id="uWikiList">
+      <ul>
+        {{#each wikis}}
+        <li>
           <p>
-            Title:
-            {{this.title}}
+            Category:
+            {{this.category}}
           </p>
-        </a>
-      </li>
-      {{/each}}
-    </ul>
+          <a href="#!" class="collection-item" data-id="{{this.id}}">
+            <p>
+              Title:
+              {{this.title}}
+            </p>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>
