@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
+const passport = require("../config/passport");
 
 // // Requiring our custom middleware for checking if a user is logged in
 // const isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -18,7 +19,7 @@ router.get("/", (req, res) => {
 });
 
 // route for the main page that grabs the wikis for the category chosen in the dropdown
-router.get("/:category", (req, res) => {
+router.get("/category/:category", (req, res) => {
   db.wikis
     .findAll({
       where: {
@@ -54,7 +55,7 @@ router.get("/create", (req, res) => {
 // route for the about page
 router.get("/about", (req, res) => {
   // will switch out index when about handlebars added
-  res.render("index");
+  res.render("about");
 });
 
 router.get("/login", (req, res) => {
