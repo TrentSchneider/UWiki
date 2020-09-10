@@ -34,8 +34,11 @@ router.get("/category/:category", (req, res) => {
       }
     })
     .then(data => {
+      if (req.user) {
+        const hbsObject = { wikis: data, user: true };
+        res.render("index", hbsObject);
+      }
       const hbsObject = { wikis: data };
-
       res.render("index", hbsObject);
     });
 });
@@ -49,6 +52,10 @@ router.get("/view/:id", (req, res) => {
       }
     })
     .then(data => {
+      if (req.user) {
+        const hbsObject = { wikis: data, user: true };
+        res.render("viewWiki", hbsObject);
+      }
       const hbsObject = { wikis: data };
       res.render("viewWiki", hbsObject);
     });
@@ -56,12 +63,20 @@ router.get("/view/:id", (req, res) => {
 
 // route for the wiki creation form
 router.get("/create", (req, res) => {
-  res.render("createWiki");
+  if (req.user) {
+    const user = { user: true };
+    res.render("createWiki", user);
+  } else if (!req.user) {
+    res.redirect("/");
+  }
 });
 
 // route for the about page
 router.get("/about", (req, res) => {
-  // will switch out index when about handlebars added
+  if (req.user) {
+    const user = { user: true };
+    res.render("about", user);
+  }
   res.render("about");
 });
 
