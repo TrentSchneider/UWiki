@@ -8,7 +8,6 @@ USE wiki_db;
 -- table skeletons (do not run tables if running models as sequelize will automatically create the tables)
 CREATE TABLE users (
 id int NOT NULL AUTO_INCREMENT,
-name VARCHAR (20),
 email VARCHAR (200),
 password VARCHAR (20),
 PRIMARY KEY(id)
