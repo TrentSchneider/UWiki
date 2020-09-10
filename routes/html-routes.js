@@ -12,6 +12,13 @@ const passport = require("../config/passport");
 
 // route for main page that grabs all wikis
 router.get("/", (req, res) => {
+  if (req.user) {
+    const user = { user: true };
+    db.wikis.findAll().then(data => {
+      const hbsObject = { wikis: data, user: user };
+      res.render("index", hbsObject);
+    });
+  }
   db.wikis.findAll().then(data => {
     const hbsObject = { wikis: data };
     res.render("index", hbsObject);
@@ -56,6 +63,11 @@ router.get("/create", (req, res) => {
 router.get("/about", (req, res) => {
   // will switch out index when about handlebars added
   res.render("about");
+});
+
+router.get("/signup", (req, res) => {
+  // will switch out index when about handlebars added
+  res.render("signup");
 });
 
 router.get("/login", (req, res) => {
