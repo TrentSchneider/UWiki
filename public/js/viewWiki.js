@@ -8,15 +8,10 @@ $(document).ready(() => {
     event.preventDefault();
     const id = $(this).data("id");
 
-    $.ajax("/view/:id", {
+    $.ajax("/view/" + id, {
       type: "GET",
-      data: id,
-    })
-      .then(() => {
-        window.location.replace("/view/:id");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
   });
 });
