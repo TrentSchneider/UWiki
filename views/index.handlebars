@@ -1,10 +1,10 @@
 <div class="container">
   <div class="collection">
     <div class="container">
-      <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Choose a wiki: </a>
-      <ul id='search' class='dropdown-content'>
+      <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Filter Category</a>
+      <ul id='dropdown1' class='dropdown-content'>
         {{#each wikis}}
-        <li><a href="/category/" + {{this.category}}> {{this.category}} </a></li>
+        <li><a href="/category/" + {{this.dataValues.category}}>{{this.dataValues.category}}</a></li>
         {{/each}}
       </ul>
     </div>
@@ -14,12 +14,12 @@
         <li>
           <p>
             Category:
-            {{this.category}}
+            {{this.dataValues.category}}
           </p>
-          <a href="#!" class="collection-item" data-id="{{this.id}}">
+          <a href="/view/{{this.dataValues.id}}" class="collection-item" data-id="{{this.dataValues.id}}">
             <p>
               Title:
-              {{this.title}}
+              {{this.dataValues.title}}
             </p>
           </a>
         </li>
@@ -28,3 +28,5 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="js/index.js"></script>
