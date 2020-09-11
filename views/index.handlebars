@@ -1,21 +1,12 @@
 <div class="container">
   <div class="collection">
     <div class="container">
-      <form id="search-site" action="search" method="get">
-        <div class="input-group">
-          <div class="input-field">
-            <input id="search" type="search" name="q" />
-            <label class="label-icon" for="search">
-              <i class="material-icons">
-                search
-              </i>
-            </label>
-          </div>
-          <button type="submit" class="input-group-addon btn">
-            search
-          </button>
-        </div>
-      </form>
+      <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Choose a wiki: </a>
+      <ul id='search' class='dropdown-content'>
+        {{#each wikis}}
+        <li><a href="/category/" + {{this.category}}> {{this.category}} </a></li>
+        {{/each}}
+      </ul>
     </div>
     <div id="uWikiList">
       <ul>
