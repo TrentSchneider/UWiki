@@ -14,12 +14,12 @@ const passport = require("../config/passport");
 router.get("/", (req, res) => {
   if (req.user) {
     const user = { user: true };
-    db.wikis.findAll().then(data => {
+    db.wikis.findAll().then((data) => {
       const hbsObject = { wikis: data, user: user };
       res.render("index", hbsObject);
     });
   }
-  db.wikis.findAll().then(data => {
+  db.wikis.findAll().then((data) => {
     const hbsObject = { wikis: data };
     res.render("index", hbsObject);
   });
@@ -30,10 +30,10 @@ router.get("/category/:category", (req, res) => {
   db.wikis
     .findAll({
       where: {
-        category: req.params.category
-      }
+        category: req.params.category,
+      },
     })
-    .then(data => {
+    .then((data) => {
       if (req.user) {
         const hbsObject = { wikis: data, user: true };
         res.render("index", hbsObject);
@@ -48,10 +48,10 @@ router.get("/view/:id", (req, res) => {
   db.wikis
     .findOne({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
-    .then(data => {
+    .then((data) => {
       if (req.user) {
         const hbsObject = { wikis: data, user: true };
         res.render("viewWiki", hbsObject);
@@ -101,12 +101,12 @@ router.get("/login", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../public/members.html"));
 // });
 
-router.delete("/api/delete/:id", req => {
+router.delete("/api/delete/:id", (req) => {
   db.wikis
     .destroy({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     })
     .then((res, err) => {
       if (err) {
@@ -117,13 +117,14 @@ router.delete("/api/delete/:id", req => {
 });
 
 router.post("/api/create", (req, res) => {
+  console.log("api/create", req.body);
   db.wikis.create(
-    [
-      { category: req.body.category },
-      { title: req.body.title },
-      { description: req.body.description }
-    ],
-    result => {
+    {
+      category: req.body.category,
+      title: req.body.title,
+      description: req.body.description,
+    },
+    (result) => {
       res.status(200).json(result.title + "has been added.");
     }
   );
@@ -136,7 +137,7 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
   // Sending back a password, even a hashed password, isn't a good idea
   res.json({
     email: req.user.email,
-    id: req.user.id
+    id: req.user.id,
   });
 });
 
@@ -146,12 +147,12 @@ router.post("/api/login", passport.authenticate("local"), (req, res) => {
 router.post("/api/signup", (req, res) => {
   db.User.create({
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   })
     .then(() => {
       res.redirect(307, "/api/login");
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(401).json(err);
     });
 });
@@ -172,7 +173,7 @@ router.get("/api/userData", (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
     });
   }
 });

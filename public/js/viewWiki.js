@@ -8,7 +8,7 @@ $(document).ready(() => {
     event.preventDefault();
     const id = $(this).data("id");
 
-    $.ajax("/view/" + id, {
+    $.ajax("/view/:" + id, {
       type: "GET",
     }).catch((err) => {
       console.log(err);

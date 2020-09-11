@@ -8,27 +8,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
     <link href="/stylesheets/style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>UWiki</title>
 </head>
+
 <body>
-<nav>
-    <div class="nav-wrapper teal lighten-2">
-        <a href="/" class="brand-logo">UWiki</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {{#if user}}
-            <li><a href="/create">Create Wiki</a></li>
-            {{/if}}
-            <li><a href="/about">About</a></li>
-            {{#unless user}}
-            <li><a href="/signup">Create Account</a></li>
-            <li><a href="/login">Login</a></li>
-            {{/unless}}
-            {{#if user}}
-            <li><a href="/logout">Logout</a></li>
-            {{/if}}
-        </ul>
-    </div>
-</nav>
-{{{body}}}
+    <nav>
+        <div class="nav-wrapper teal lighten-2">
+            <a href="/" class="brand-logo">UWiki</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {{#if user}}
+                <li><a href="/create">Create Wiki</a></li>
+                {{/if}}
+                <li><a href="/about">About</a></li>
+                {{#unless user}}
+                <li><a href="/signup">Create Account</a></li>
+                <li><a href="/login">Login</a></li>
+                {{/unless}}
+                {{#if user}}
+                <li><a href="/logout">Logout</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+    {{{body}}}
 </body>
+<script src="./js/addWiki.js"></script>
+
 </html>
