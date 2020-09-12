@@ -7,13 +7,13 @@ $(document).ready(() => {
   const title = $("#title");
   const description = $("#description");
 
-  addWiki.on("submit", event => {
+  addWiki.on("submit", (event) => {
     event.preventDefault();
     console.log("on submitting wiki");
     const newWiki = {
       category: category.val().trim(),
       title: title.val().trim(),
-      description: description.val().trim()
+      description: description.val().trim(),
     };
 
     if (!newWiki.category || !newWiki.title || !newWiki.description) {
@@ -21,9 +21,15 @@ $(document).ready(() => {
     }
     $.ajax("/api/create", {
       type: "POST",
-      data: newWiki
-    }).catch(err => {
-      console.log(err);
-    });
+      data: newWiki,
+    })
+      .then(() => {
+        category.val("");
+        title.val("");
+        description.val("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 });

@@ -1,16 +1,26 @@
-<h2>
-  Add a Wiki
-</h2>
 <div class="container">
-  <div class="container">
+  <h2 class="AboutTitle">
+    Add a Wiki
+  </h2>
+</div>
+<div class="container">
+  <div class="card">
     <form id="add-form">
       <div class="input-group">
-        <input id="title" type="title" name="title" />
-        <label class="label-icon" for="title">Title :</label>
-        <input id="category" type="category" name="category" />
-        <label class="label-icon" for="category">Category: </label>
-        <input id="description" type="description" name="description" row="10" />
-        <label class="label-icon" for="description">Description: </label>
+
+        <label for="title">Title</label>
+        <textarea id="title" class="materialize-textarea label-icon"></textarea>
+
+        <br>
+        <label for="category">Category</label>
+        <textarea id="category" class="materialize-textarea label-icon"></textarea>
+
+        <br>
+        <label for="description">Description</label>
+        <textarea id="description" type="description" name="description"
+          class="materialize-textarea label-icon"></textarea>
+
+        <br>
         <button type="submit" id="add" class="input-group-addon btn"> Add </button>
       </div>
     </form>
