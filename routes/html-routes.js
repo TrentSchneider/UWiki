@@ -1,12 +1,7 @@
-// Requiring path to so we can use relative routes to our HTML files
-// const path = require("path");
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const passport = require("../config/passport");
-
-// // Requiring our custom middleware for checking if a user is logged in
-// const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // these routers will construct the handlebars and display them after they use the sequelize call
 
@@ -26,6 +21,7 @@ router.get("/", (req, res) => {
   }
 });
 
+// ** For future development
 // route for the main page that grabs the wikis for the category chosen in the dropdown
 router.get("/category/:category", (req, res) => {
   db.wikis
@@ -44,7 +40,7 @@ router.get("/category/:category", (req, res) => {
     });
 });
 
-// route for the view page that displays the wiki for the id that matches the button's data-id
+// route for the view page that displays the wiki for the id that matches the selected wiki
 router.get("/view/:id", (req, res) => {
   db.wikis
     .findOne({
@@ -81,27 +77,21 @@ router.get("/about", (req, res) => {
   res.render("about");
 });
 
+// Route for the signup form
 router.get("/signup", (req, res) => {
-  // will switch out index when about handlebars added
   res.render("signup");
 });
 
+// Route for login page
 router.get("/login", (req, res) => {
-  // If the user already has an account send them to the members page
   if (req.user) {
     res.redirect("/");
   }
-  // will switch out index when login form handlebars added
   res.render("login");
 });
 
-// // The isAuthenticated can be added to the home page route so that handlebars can pick whether they are able to create/edit pages or not
-// // Here we've add our isAuthenticated middleware to this route.
-// // If a user who is not logged in tries to access this route they will be redirected to the signup page
-// router.get("/members", isAuthenticated, (req, res) => {
-//   res.sendFile(path.join(__dirname, "../public/members.html"));
-// });
-
+// ** For future development
+// route to delete wikis
 router.delete("/api/delete/:id", req => {
   db.wikis
     .destroy({
@@ -117,6 +107,7 @@ router.delete("/api/delete/:id", req => {
     });
 });
 
+// API route for creating a wiki
 router.post("/api/create", (req, res) => {
   console.log("api/create", req.body);
   db.wikis
@@ -132,20 +123,15 @@ router.post("/api/create", (req, res) => {
     });
 });
 
-// Using the passport.authenticate middleware with our local strategy.
-// If the user has valid login credentials, send them to the members page.
-// Otherwise the user will be sent an error
+// route for the API login that also uses passport authentication
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
-  // Sending back a password, even a hashed password, isn't a good idea
   res.json({
     email: req.user.email,
     id: req.user.id
   });
 });
 
-// Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-// how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-// otherwise send back an error
+// route for API signup
 router.post("/api/signup", (req, res) => {
   db.User.create({
     email: req.body.email,
@@ -165,14 +151,12 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+// ** For future development
 // Route for getting some data about our user to be used client side
 router.get("/api/userData", (req, res) => {
   if (!req.user) {
-    // The user is not logged in, send back an empty object
     res.json({});
   } else {
-    // Otherwise send back the user's email and id
-    // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
       id: req.user.id
