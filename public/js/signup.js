@@ -25,7 +25,7 @@ $(document).ready(() => {
     passwordInput.val("");
   });
 
-  // Does a post to the signup route. If successful, we are redirected to the members page
+  // Does a post to the signup route. If successful, we are redirected to the main page
   // Otherwise we log any errors
   function signUpUser(email, password) {
     $.post("/api/signup", {
@@ -34,7 +34,7 @@ $(document).ready(() => {
     })
       .then(() => {
         window.location.replace("/");
-        // If there's an error, handle it by throwing up a bootstrap alert
+        // If there's an error, handle it by throwing up an alert
       })
       .catch(handleLoginErr);
   }

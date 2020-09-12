@@ -1,34 +1,33 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 console.log("thisworks");
 $(document).ready(() => {
-  //const variable for
   const addWiki = $("#add-form");
   const category = $("#category");
   const title = $("#title");
   const description = $("#description");
-
-  addWiki.on("submit", (event) => {
+  // wiki creation button functionality
+  addWiki.on("submit", event => {
     event.preventDefault();
-    console.log("on submitting wiki");
     const newWiki = {
       category: category.val().trim(),
       title: title.val().trim(),
-      description: description.val().trim(),
+      description: description.val().trim()
     };
-
+    // Stops the reminain code from running if a field is blank
     if (!newWiki.category || !newWiki.title || !newWiki.description) {
       return;
     }
+    // POST request
     $.ajax("/api/create", {
       type: "POST",
-      data: newWiki,
+      data: newWiki
     })
       .then(() => {
         category.val("");
         title.val("");
         description.val("");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   });
