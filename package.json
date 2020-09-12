@@ -1,5 +1,5 @@
 {
-  "name": "UWiki",
+  "name": "uwiki",
   "version": "1.0.0",
   "description": "Project2 group name: The ATeam Team members: Trenton Schneider, Trevor McPherson, Lisa Suvarna app name: UWiki",
   "main": "server.js",
