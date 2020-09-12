@@ -1,28 +1,32 @@
 <div class="container">
-  <div class="collection">
-    <div class="container">
+  <div class="card">
+    <h3 class="AboutTitle">Wiki List</h3>
+
+    {{!-- <div class="container">
       <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Filter Category</a>
       <ul id='dropdown1' class='dropdown-content'>
         {{#each wikis}}
         <li><a href="/category/" + {{this.dataValues.category}}>{{this.dataValues.category}}</a></li>
         {{/each}}
       </ul>
-    </div>
+    </div> --}}
     <div id="uWikiList">
       <ul>
         {{#each wikis}}
-        <li>
-          <p>
-            Category:
-            {{this.dataValues.category}}
-          </p>
-          <a href="/view/{{this.dataValues.id}}" class="collection-item" data-id="{{this.dataValues.id}}">
+        <a href="/view/{{this.dataValues.id}}" class="collection-item aclass" data-id="{{this.dataValues.id}}">
+          <li class="card">
             <p>
               Title:
               {{this.dataValues.title}}
             </p>
-          </a>
-        </li>
+
+            <p>
+              Category:
+              {{this.dataValues.category}}
+            </p>
+          </li>
+        </a>
+
         {{/each}}
       </ul>
     </div>
